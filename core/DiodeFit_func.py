@@ -22,7 +22,7 @@ def NonIdealDiode_dark(V, J0, n, Rs, Rsh, T = 300):
     """ Solve non ideal diode equation for dark current
         J = J0*[exp(-(V-J*Rs)/(n*Vt*)) - 1] + (V - J*Rs)/Rsh
         with the method described in:
-        Solid-State Electronics 44 (2000) 1861±1864,
+        Solid-State Electronics 44 (2000) 1861-1864,
         see equation (4)-(5)
     
 
@@ -397,3 +397,6 @@ def FitNonIdealDiode(V,J,T=300,JV_type='dark',take_log=True,bounds = ([1e-30, 0.
         J0, n, Rs, Rsh, Jph = popt
         J0_err, n_err, Rs_err, Rsh_err, Jph_err = perr
         return {'J0':J0, 'J0_err':J0_err, 'n':n, 'n_err':n_err, 'Rs':Rs, 'Rs_err':Rs_err, 'Rsh':Rsh, 'Rsh_err':Rsh_err, 'Jph':Jph, 'Jph_err':Jph_err}
+
+if __name__ == '__main__':
+    print()
