@@ -1,0 +1,11 @@
+TO DO:
+-------------------------------------------------------
+1. Make some good test for the light non-ideal diode function.
+
+-------------------------------------------------------
+'''
+Version 0.0.1, 19 July 2022, VLC
+
+First version of the script. I alos tried to implement some test for the dark non-ideal diode equation which seems to be OK.
+Also looks like the light JV gives similar results than the pvlib (https://github.com/pvlib/pvlib-python/tree/master/pvlib) one, but I could not find a good way to test them.
+Looks like at high current the error in the computation of the current is quite significant such that the superposition of the light current and the dark + Jph does not really work... Not 100% sure why.

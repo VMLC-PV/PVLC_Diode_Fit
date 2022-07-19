@@ -11,6 +11,7 @@ from scipy.optimize import curve_fit
 from scipy.special import lambertw
 from scipy import constants
 from scipy import interpolate
+from pvlib.pvsystem import i_from_v
 
 
 ## Physics constants
@@ -114,9 +115,48 @@ def NonIdealDiode_light(V,J0,n,Rs,Rsh,Jph,T=300):
 
     Vt = kb*T
     w = lambertw(((J0*Rs*Rsh)/(n*Vt*(Rs+Rsh)))*np.exp((Rsh*(V+Jph*Rs+J0*Rs))/(n*Vt*(Rs+Rsh)))) # check equation (2) in the paper
+    w = w.real # remove the imaginary part
     Current = -(V/(Rs+Rsh)) - (n*Vt/Rs) * w + ((Rsh*(J0+Jph))/(Rs+Rsh))
 
     return -Current.real
+
+
+def NonIdealDiode_light_pvlib(V,J0,n,Rs,Rsh,Jph,T=300,method='lambertw'):
+    """ Solve non ideal diode equation for light current
+        J = Jph - J0*[exp(-(V-J*Rs)/(n*Vt*)) - 1] - (V - J*Rs)/Rsh
+        with the method described in:
+        Solar Energy Materials & Solar Cells 81 (2004) 269–277
+        see equation (1)-(2)
+
+
+    Parameters
+    ----------
+    V : 1-D sequence of floats
+        Array containing the voltages.
+    J0 : float
+        Dark Saturation Current.
+    n : float
+        Ideality factor.
+    Rs : float
+        Series resistance.
+    Rsh : float
+        Shunt resistance.
+    Jph : float
+        Photocurrent.
+    T : float, optional
+        Absolute temperature , by default 300
+
+    Returns
+    -------
+    1-D sequence of floats
+        Array containing the currents.
+    """   
+
+    Vt = kb*T
+    Current = i_from_v(Rsh, Rs, n*Vt, V,J0, Jph, method=method)
+
+    return -Current.real
+
 
 def NonIdealDiode_light_log(V,J0,n,Rs,Rsh,Jph,T=300):
     """ The logarithmic version of the non ideal diode equation for light current
