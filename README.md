@@ -5,7 +5,7 @@ Vincent M. Le Corre
 
 ## Description
 Series of utilities for fitting non-ideal diode models to JV data. 
-The utilities can be used to fit a dark JV curve of a solar cells with the following equations:
+The utilities can be used to fit a JV curves of a solar cells with the following equations:
 ### Dark non-ideal diode model:
 $$J = J_0\left[\exp\left(-\frac{V-R_s J}{n k_b T}\right)-1\right] + \frac{V-R_s J}{R_{sh}}$$
 ![](/image/dark_circuit_diode.png)\
