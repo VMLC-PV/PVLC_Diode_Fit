@@ -22,3 +22,11 @@ And for the light JV, the method is based on the study by Jain et al. published 
         ├── test_data                           # Directory with some test samples of JV data
         ├── Notebooks                           # Contains clean versions of the Notebooks, Notebooks need to be moved to the main directory to be used
     └── README.md
+
+This math is inline $`a^2+b^2=c^2`$.
+
+This is on a separate line
+
+```math
+a^2+b^2=c^2
+```
